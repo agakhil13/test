@@ -17,7 +17,7 @@ for index, row in df.iterrows():
         print('Execute some APIs!')
         df_1.loc[df_1.index[df_1[' Repo Name'] == row[" Repo Name"]],
                  '  Collaborators'] = 'Replace this with desired string value!'
-        df_1.to_csv('./csv/some-new-file.csv')
+        df_1.to_csv('./csv/some-new-file.csv')  # Either write to CSV here or towards the end of the loop!
 
     else:
 
@@ -28,7 +28,7 @@ for index, row in df.iterrows():
             print('Execute some APIs!')
             df_1.loc[df_1.index[df_1[' Repo Name'] == row[" Repo Name"]],
                      '  Collaborators'] = 'Replace this with desired string value!'
-            df_1.to_csv('./csv/some-new-file.csv')
+            df_1.to_csv('./csv/some-new-file.csv')  # Either write to CSV here or towards the end of the loop!
 
         else:                                     # if last commit is same in both CSVs
 
