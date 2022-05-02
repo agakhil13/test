@@ -17,3 +17,6 @@ for index, row in df.iterrows():
         print('Caught the match!')
         print('Match found at : ' + location)
         print('Match found at : ' + location[' Last Commit'])
+        
+
+        # Now compare location[' Last Commit'] and row[' Last Commit'] and proceed further!
