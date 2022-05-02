@@ -15,5 +15,5 @@ for index, row in df.iterrows():
     else:
 
         print('Caught the match!')
-        # print('Match found at : ' + location)
-        print('Match found at : ' + location[' Last Commit'][1])
+        print('Match found at : ' + location)
+        print('Match found at : ' + location[' Last Commit'])
