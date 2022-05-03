@@ -1,35 +1,26 @@
 import pandas as pd
 
-df = pd.read_csv('./csv/data.csv')
-df_1 = pd.read_csv('./csv/data1.csv')
+#Reading csv as dataframe
+old_df = pd.read_csv('data.csv')
+new_df = pd.read_csv('data1.csv')
+#Converting Repo Column to List
+old_repo = old_df[" Repo Name"].tolist()
+new_repo = new_df[" Repo Name"].tolist()
 
+for repo in new_repo: #Iterating Repo in New file
 
-for index, row in df.iterrows():
+    if repo in old_repo: #Repo name from new file exists in old file
+        new_commit = new_df.loc[new_df[' Repo Name'] == repo, ' Last Commit'].tolist()[0] #Fetcing commit cell for matched repo from new file 
+        old_commit = old_df.loc[old_df[' Repo Name'] == repo, ' Last Commit'].tolist()[0] #Fetcing commit cell for matched repo from old file
+        
+        if new_commit == old_commit: #Comparing commit from new file and old file for found repo name
+            #new_df.loc[new_df[' Repo Name'] == repo, " Collaborators"] = "Unchanged"
+            pass
+        else: #Commit date in old and new not same
+            new_df.loc[new_df[' Repo Name'] == repo, " Collaborators"] = "Commit changed"
+    
+    else: #Repo name from new file not exists in old file 
+        new_df.loc[new_df[' Repo Name'] == repo, " Collaborators"] = "New Entry"
 
-    # location is a dataframe having the whole matched row inside it!
-    location_match_for_repo_name = df_1.loc[df_1.index[df_1[' Repo Name']
-                                                       == row[" Repo Name"]]]
-    location_match_for_last_commit = df_1.loc[df_1.index[df_1[' Last Commit']
-                                                         == row[" Last Commit"]]]
-
-    if location_match_for_repo_name.empty:
-
-        print('Execute some APIs!')
-        df_1.loc[df_1.index[df_1[' Repo Name'] == row[" Repo Name"]],
-                 '  Collaborators'] = 'Replace this with desired string value!'
-        df_1.to_csv('./csv/some-new-file.csv')  # Either write to CSV here or towards the end of the loop!
-
-    else:
-
-        print('Now checking if Last commit is same or not in both CSVs!')
-
-        if location_match_for_last_commit.empty:  # if last commit is not same in both CSVs
-
-            print('Execute some APIs!')
-            df_1.loc[df_1.index[df_1[' Repo Name'] == row[" Repo Name"]],
-                     '  Collaborators'] = 'Replace this with desired string value!'
-            df_1.to_csv('./csv/some-new-file.csv')  # Either write to CSV here or towards the end of the loop!
-
-        else:                                     # if last commit is same in both CSVs
-
-            print('Ignoring the repo!')
+#Saving dataframe
+new_df.to_csv("data2.csv", index=False)
